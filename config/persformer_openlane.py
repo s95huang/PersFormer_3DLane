@@ -26,13 +26,10 @@ def config(args):
 
     # 1000 sequence
     args.dataset_name = 'openlane'
-    args.dataset_dir = '/mnt/disk01/openlane/images/'
-    args.data_dir = '/mnt/disk01/openlane/lane3d_1000/'
-
-    if 'openlane' in args.dataset_name:
-        openlane_config(args)
-    else:
-        sim3d_config(args)
+    args.dataset_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/images/'
+    # args.data_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/lane3d_1000/'
+    args.data_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/lane3d_300/'
+    # args.data_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/lane3d_100/'
 
     args.save_prefix = ops.join(os.getcwd(), 'data_splits')
     args.save_path = ops.join(args.save_prefix, args.dataset_name)

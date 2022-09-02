@@ -218,8 +218,9 @@ class Runner:
                 if (i + 1) % args.print_freq == 0 and args.proc_id == 0:
                     print('Epoch: [{0}][{1}/{2}]\t'
                         'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                        'Loss {loss.val:.8f} ({loss.avg:.8f})'.format(epoch+1, i+1, len(train_loader), 
-                                            batch_time=batch_time, data_time=data_time, loss=loss_list[0]))
+                        'Loss {loss.val:.8f} ({loss.avg:.8f})\t'
+                        'ETA {eta:.3f}\t'.format(epoch+1, i+1, len(train_loader), 
+                                            batch_time=batch_time, data_time=data_time, loss=loss_list[0],eta = batch_time.avg * (len(train_loader) - i - 1)*args.nepochs/60))
 
             # Adjust learning rate
             scheduler.step()
@@ -526,6 +527,8 @@ class Runner:
             train_dataset = LaneDataset(args.dataset_dir, ops.join(args.data_dir, 'train.json'), args, data_aug=True, save_std=True)
         
         # train_dataset.normalize_lane_label()
+        # print("===> Training set size: {}".format(len(train_dataset)))
+        # print("===> args: {}".format(args))
         train_loader, train_sampler = get_loader(train_dataset, args)
 
         return train_dataset, train_loader, train_sampler
