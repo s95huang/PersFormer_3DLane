@@ -34,3 +34,8 @@ python -m torch.distributed.launch --nproc_per_node 1  main_persformer.py --mod=
 ```
 python -m torch.distributed.launch --nproc_per_node 1  main_persformer.py --mod=bruce_2d_only --batch_size=2 --nepochs=100
 ```
+
+```
+python3 -m torch.distributed.launch --nproc_per_node 1 main_persformer.py --mod=bruce_2d --batch_size=2 --nepochs=100
+
+```
