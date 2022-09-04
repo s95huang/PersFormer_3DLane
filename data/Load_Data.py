@@ -39,9 +39,7 @@ sys.path.append('./')
 warnings.simplefilter('ignore', np.RankWarning)
 matplotlib.use('Agg')
 
-K = np.array([[1000., 0., 960.],
-                       [0., 1000., 640.],
-                       [0., 0., 1.]])
+
 class LaneDataset(Dataset):
     """
     Dataset with labeled lanes
@@ -97,7 +95,7 @@ class LaneDataset(Dataset):
         self.strip_size = self.h_net / self.n_strips
         self.offsets_ys = np.arange(self.h_net, -1, -self.strip_size)
 
-        self.K = K
+        self.K = args.K
         self.H_crop = homography_crop_resize([args.org_h, args.org_w], args.crop_y, [args.resize_h, args.resize_w])
         # transformation from ipm to ground region
         self.H_ipm2g = cv2.getPerspectiveTransform(np.float32([[0, 0],

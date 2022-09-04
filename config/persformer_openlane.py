@@ -27,9 +27,12 @@ def config(args):
     # 1000 sequence
     args.dataset_name = 'openlane'
     args.dataset_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/images/'
-    # args.data_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/lane3d_1000/'
     args.data_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/lane3d_300/'
-    # args.data_dir = '/mnt/0cb7d5a4-6618-47e1-b81a-2315ebd35b37/data/openlane/dataset/lane3d_100/'
+
+    if 'openlane' in args.dataset_name:
+        openlane_config(args)
+    else:
+        sim3d_config(args)
 
     args.save_prefix = ops.join(os.getcwd(), 'data_splits')
     args.save_path = ops.join(args.save_prefix, args.dataset_name)
@@ -51,7 +54,7 @@ def config(args):
 
     # Define the network model
     # change encoder, "EfficientNet-B7"
-    args.encoder = "EfficientNet-B7"
+    args.encoder = "EfficientNet-B3"
 
     # init
     # args.weight_init = 'xavier'
@@ -189,3 +192,5 @@ def openlane_config(args):
     args.prob_th = 0.5
     args.num_class = 2  # 1 background + n lane labels
     args.y_ref = 5  # new anchor prefer closer range gt assign
+    args.proc_id = 0
+    args.distributed = False
